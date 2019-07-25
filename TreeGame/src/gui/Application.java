@@ -20,8 +20,9 @@ public class Application {
  * 6)Upgrade graphically end game window and save last time per level 
  * 7)Add database with clock history
  * 8)Correct connection to mysql database
- * 9)Add and connect project to git(github)
- * 10)Add some graphical details
- * 11)To be completed
+ * 9)Add some graphical details
+ * .
+ * .
+ * .
  */
 }

@@ -61,16 +61,13 @@ public class Window extends JFrame implements ActionListener{
 		Object source = arg0.getSource();
 		if(source == bPoziomLatwy) {
 			dispose();
-			LevelEasy levelEasy;
-			try {
-				levelEasy = new LevelEasy();
-				levelEasy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				levelEasy.setVisible(true);
-				levelEasy.setLocationRelativeTo(null);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			LevelChooser levelChooser;
+			
+				levelChooser = new LevelChooser();
+				levelChooser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				levelChooser.setVisible(true);
+				levelChooser.setLocationRelativeTo(null);
+			
 			
 		}
 		else if(source == bPoziomSredni) {

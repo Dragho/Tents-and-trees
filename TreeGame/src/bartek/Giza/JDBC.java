@@ -8,8 +8,8 @@ import java.sql.SQLException;
 public class JDBC {
 
 	static String dataFromDatabase;
-	
-	static public int[][] wczytajPlansze(int level) throws SQLException {
+	//INTEGER NUMBER IS SUPPOSED TO CHOOSE LEVEL FROM DB
+	static public int[][] wczytajPlansze(int level, int number) throws SQLException {
 		String URLConnection = "jdbc:mysql://localhost:3306/myfirstschema?user=newuser&password=asdQWE";
 		String query = "Select * FROM myfirstschema.leveleasy";
 		int length=0;
@@ -69,6 +69,7 @@ public class JDBC {
 	static int[][] processingArray(ResultSet rs, int len) throws SQLException{
 		int [][] table = new int[len+1][len+1];
 		int j=0;
+		
 		while (rs.next()) {	
 			 
 			for(int i=0;i<len;i++) {

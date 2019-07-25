@@ -31,9 +31,9 @@ public class LevelEasy extends JFrame{
 	private final int BOARD_Y_POSITION = 70;
 	private final int LENGTH = 6;
 	
-	public LevelEasy() throws SQLException{
+	public LevelEasy(int number) throws SQLException{
 		super("Level ³atwy");
-		int[][] table = JDBC.wczytajPlansze(1);
+		int[][] table = JDBC.wczytajPlansze(1,number);
 		JDBC.wyswietlDaneZBazy(table, 6);
 		
 		JButton bWyjscie;
