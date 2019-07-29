@@ -3,6 +3,8 @@ package gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Formatter;
+import java.util.Timer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,17 +12,34 @@ import javax.swing.JLabel;
 
 public class WinnerWindow extends JFrame implements ActionListener {
 
-	public WinnerWindow() {
+	public WinnerWindow(MyTimerTask timer) {
 			super("CONGRATULATIONS!");
+			JLabel lText, lTime, lEndTime;
 			
 			setSize(400, 500);
 			setLayout(null);
 			
-			JLabel text = new JLabel("YOU WIN!");
-			text.setBounds(40, 100, 200, 200);
-			text.setFont(new Font("SansSerif", Font.BOLD, 40));
-			add(text);
+			lText = new JLabel("YOU WIN!");
+			lText.setBounds(80, 80, 100, 200);
+			lText.setFont(new Font("SansSerif", Font.BOLD, 20));
+			add(lText);
 			
+			lTime = new JLabel("Your time:");
+			lTime.setBounds(40,200,100,20);
+			lTime.setFont(new Font("SansSerif", Font.BOLD, 20));
+			add(lTime);
+			
+			lEndTime = new JLabel("time");
+			lEndTime.setBounds(120, 200, 100, 20);
+			lEndTime.setFont(new Font("SansSerif", Font.BOLD, 15));
+			Formatter formatter = new Formatter();
+		   	formatter.format("%d  :  %02d",timer.minutes, timer.seconds);
+		   	String formattedString = formatter.toString();
+		   	lEndTime.setText(formattedString);
+			add(lEndTime);
+			
+			//JLabel bestTime = new JLabel("Your best time:");
+
 			JButton bWyjscie = new JButton("Wyjœcie");
 			bWyjscie.setBounds(220, 380, 130, 40);
 			bWyjscie.setFont(new Font("SansSerif", Font.BOLD, 15));

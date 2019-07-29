@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import bartek.Giza.JDBC;
 
 public class Window extends JFrame implements ActionListener{
-	JButton bPoziomLatwy, bPoziomSredni, bPoziomTrudny, bWyjscie;
+	JButton bLevelEasy, bLevelMed, bLevelHard, bExit;
 	JLabel menu;
 	public Window() {
 		super("My window");
@@ -22,34 +22,34 @@ public class Window extends JFrame implements ActionListener{
 		setSize(400, 500);
 		setLayout(null);
 		
-		bPoziomLatwy = new JButton("Poziom £atwy");
-		bPoziomLatwy.setBounds(100, 120, 180, 50);
-		bPoziomLatwy.setFont(new Font("SansSerif", Font.BOLD, 15));
-		bPoziomLatwy.setForeground(Color.green);
-		add(bPoziomLatwy);
-		bPoziomLatwy.addActionListener(this);
+		bLevelEasy = new JButton("Level easy");
+		bLevelEasy.setBounds(100, 120, 180, 50);
+		bLevelEasy.setFont(new Font("SansSerif", Font.BOLD, 15));
+		bLevelEasy.setForeground(Color.green);
+		add(bLevelEasy);
+		bLevelEasy.addActionListener(this);
 		
-		bPoziomSredni = new JButton("Poziom Œredni");
-		bPoziomSredni.setBounds(100, 180, 180, 50);
-		bPoziomSredni.setFont(new Font("SansSerif", Font.BOLD, 15));
-		bPoziomSredni.setForeground(Color.orange);
-		add(bPoziomSredni);
-		bPoziomSredni.addActionListener(this);
+		bLevelMed = new JButton("Level medium");
+		bLevelMed.setBounds(100, 180, 180, 50);
+		bLevelMed.setFont(new Font("SansSerif", Font.BOLD, 15));
+		bLevelMed.setForeground(Color.orange);
+		add(bLevelMed);
+		bLevelMed.addActionListener(this);
 		
-		bPoziomTrudny = new JButton("Poziom Trudny");
-		bPoziomTrudny.setBounds(100, 240, 180, 50);
-		bPoziomTrudny.setFont(new Font("SansSerif", Font.BOLD, 15));
-		bPoziomTrudny.setForeground(Color.red);
-		add(bPoziomTrudny);
-		bPoziomTrudny.addActionListener(this);
+		bLevelHard = new JButton("Level hard");
+		bLevelHard.setBounds(100, 240, 180, 50);
+		bLevelHard.setFont(new Font("SansSerif", Font.BOLD, 15));
+		bLevelHard.setForeground(Color.red);
+		add(bLevelHard);
+		bLevelHard.addActionListener(this);
 		
-		bWyjscie = new JButton("Wyjœcie");
-		bWyjscie.setBounds(220, 380, 130, 40);
-		bWyjscie.setFont(new Font("SansSerif", Font.BOLD, 15));
-		add(bWyjscie);
-		bWyjscie.addActionListener(this);
+		bExit = new JButton("Exit");
+		bExit.setBounds(220, 380, 130, 40);
+		bExit.setFont(new Font("SansSerif", Font.BOLD, 15));
+		add(bExit);
+		bExit.addActionListener(this);
 		
-		menu = new JLabel("MENU G£ÓWNE");
+		menu = new JLabel("MAIN MENU");
 		menu.setBounds(115, 20, 250, 50);
 		menu.setFont(new Font("SansSerif", Font.BOLD, 20));
 	  //lWyswietlDate.setForeground(new Color(200,40,200));
@@ -59,7 +59,7 @@ public class Window extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object source = arg0.getSource();
-		if(source == bPoziomLatwy) {
+		if(source == bLevelEasy) {
 			dispose();
 			LevelChooser levelChooser;
 			
@@ -70,13 +70,13 @@ public class Window extends JFrame implements ActionListener{
 			
 			
 		}
-		else if(source == bPoziomSredni) {
+		else if(source == bLevelMed) {
 			
 		}
-		else if(source == bPoziomTrudny) {
+		else if(source == bLevelHard) {
 			
 		}
-		else if(source == bWyjscie) {
+		else if(source == bExit) {
 			System.exit(0);
 		}
 		

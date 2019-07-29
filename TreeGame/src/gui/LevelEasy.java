@@ -47,11 +47,9 @@ public class LevelEasy extends JFrame{
 		information.setBounds(5, 5, 240, 20);
 		information.setForeground(Color.BLACK);
 		
-		
 		topValues = new JPanel();
 		topValues.setBounds(BOARD_X_POSITION, 30, BOARD_WIDTH, 35);
 		topValues.setLayout(new GridLayout(1,LENGTH));
-		
 		
 		JLabel[] topLabels = new JLabel[7];
 		for(int i=0;i<6;i++) {
@@ -65,7 +63,6 @@ public class LevelEasy extends JFrame{
 		leftValues.setBounds(10, BOARD_Y_POSITION, 35, BOARD_HEIGHT);
 		leftValues.setLayout(new GridLayout(LENGTH,1));
 		
-		
 		JLabel[] leftLabels = new JLabel[7];
 		for(int i=0;i<6;i++) {
 			leftLabels[i] = new JLabel(Integer.toString(table[1+i][0]));
@@ -75,16 +72,30 @@ public class LevelEasy extends JFrame{
 			leftValues.add(leftLabels[i]);
 		}
 		
-		
 		boardBG = new JPanel();
 		boardBG.setBounds(BOARD_X_POSITION - 5, BOARD_Y_POSITION - 5, BOARD_WIDTH + 10, BOARD_HEIGHT + 10);
 		boardBG.setBackground(new Color(0,0,0));
-		
 		
 		board = new JPanel();
 		board.setBounds(BOARD_X_POSITION, BOARD_Y_POSITION, BOARD_WIDTH, BOARD_HEIGHT);
 		board.setBackground(new Color(0,255,64));
 		board.setLayout(new GridLayout(LENGTH,LENGTH));
+		
+		lTimerText = new JLabel("Timer: ");
+		lTimerText.setBounds(240, 10, 100, 20);
+		lTimerText.setForeground(Color.GRAY);
+		lTimerText.setFont(new Font("SansSerif", Font.BOLD, 15));
+		add(lTimerText);
+		
+		lTime = new JLabel("0");
+		lTime.setBounds(300, 10, 100, 20);
+		lTime.setForeground(Color.GRAY);
+		lTime.setFont(new Font("SansSerif", Font.BOLD, 15));
+		add(lTime);
+		
+		MyTimerTask myTimerTask = new MyTimerTask(lTime);
+		
+		timer1.schedule(myTimerTask,1,1000); //timer wykonuje metode run co 1 sekunde
 		
 		JButton[][] tabButton = new JButton[7][7];
 		for(int i=1;i<7;i++) {
@@ -107,8 +118,6 @@ public class LevelEasy extends JFrame{
 						            		image = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
 											tabButton[i][j].setIcon(new ImageIcon(image));
 											//JDBC.wyswietlDaneZBazy(table, 6);
-											
-											
 						            	}
 						            	else if(table[i][j]==1) {
 						            		table[i][j]=2;
@@ -127,19 +136,16 @@ public class LevelEasy extends JFrame{
 						            	}
 						            	if(Mechanics.checkGameMechanics(table,topLabels, leftLabels, information, i,j, LENGTH)==1) {
 						            		dispose();
-						            		WinnerWindow winnerWindow = new WinnerWindow();
+						            		WinnerWindow winnerWindow = new WinnerWindow(myTimerTask);
 						            		winnerWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						            		winnerWindow.setVisible(true);
 						            		winnerWindow.setLocationRelativeTo(null);
-						            		
 						            	}
-						                
 						            }                                       
 						        }
-						}
+							}
 						}
 					});
-					
 				}
 				else if(table[i][j]==4) {
 					
@@ -174,46 +180,6 @@ public class LevelEasy extends JFrame{
 			}
 		});
 		
-		lTimerText = new JLabel("Timer: ");
-		lTimerText.setBounds(240, 10, 100, 20);
-		lTimerText.setForeground(Color.GRAY);
-		lTimerText.setFont(new Font("SansSerif", Font.BOLD, 15));
-		add(lTimerText);
-		
-		
-		lTime = new JLabel("0");
-		lTime.setBounds(300, 10, 100, 20);
-		lTime.setForeground(Color.GRAY);
-		lTime.setFont(new Font("SansSerif", Font.BOLD, 15));
-		add(lTime);
-		
-		class MyTimerTask extends TimerTask{
-			 int seconds = 0;
-			 int minutes = 0;
-			
-		     public void run()
-		     {
-		    	 Formatter formatter = new Formatter();
-		    	 formatter.format("%d  :  %02d",minutes, seconds);
-		    	 String formattedString = formatter.toString();
-		    	 
-		    	 lTime.setText(formattedString);
-		    	 seconds++;
-		    	 if(seconds==60) {
-		    		 seconds=0;
-		    		 minutes++;
-		    	 }
-		     }
-		     /*
-		     public Duration overallTime() {
-		    	 Duration duration = new Duration();
-		    	 
-		     }
-		     */
-		}
-		timer1.schedule(new MyTimerTask(),1,1000); //timer wykonuje metode run do 1 sekunde
-		
-       
 		
 		
 		setSize(400, 500);

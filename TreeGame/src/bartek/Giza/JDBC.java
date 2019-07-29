@@ -66,43 +66,6 @@ public class JDBC {
         return null;
 	}
 	
-	
-	/*
-	static int[][] processingArray(ResultSet rs, int len, int number) throws SQLException{
-		int [][] table = new int[len+1][len+1];
-		int j=0;
-		number++;
-		int counter=1;
-			while (rs.next()) {	
-				
-					for(int i=0;i<len;i++) {
-						if(j<=len*number-1) {
-							table[j+1][i+1]=rs.getInt(i+2);
-						}
-						else if(j==len*number){
-							table[0][i+1]=rs.getInt(i+2);
-						}
-						else if(j==len*number+1){
-							table[i+1][0]=rs.getInt(i+2);
-						}
-					}
-					j++;
-					System.out.println(rs.getInt(1));
-					
-				
-				table[0][0]=0;
-				if(counter==number) {
-					//return table;
-				}
-				counter++;
-				
-		}
-		
-		
-		return table;
-	}
-	*/
-	
 	static int[][] processingArray(ResultSet rs, int len, int number) throws SQLException{
 		int [][] table = new int[len+1][len+1];
 		int j=0;
