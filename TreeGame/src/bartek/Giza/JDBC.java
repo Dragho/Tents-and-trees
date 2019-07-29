@@ -44,7 +44,7 @@ public class JDBC {
                 ResultSet rs = stmt.executeQuery(query);
 
               
-                int tab[][] = processingArray(rs,length);
+                int tab[][] = processingArray(rs,length,number);
                 
                 conn.close();
                 return tab;
@@ -66,29 +66,70 @@ public class JDBC {
         return null;
 	}
 	
-	static int[][] processingArray(ResultSet rs, int len) throws SQLException{
+	
+	/*
+	static int[][] processingArray(ResultSet rs, int len, int number) throws SQLException{
 		int [][] table = new int[len+1][len+1];
 		int j=0;
-		
-		while (rs.next()) {	
-			 
-			for(int i=0;i<len;i++) {
-				if(j<=len-1) {
-					table[j+1][i+1]=rs.getInt(i+2);
+		number++;
+		int counter=1;
+			while (rs.next()) {	
+				
+					for(int i=0;i<len;i++) {
+						if(j<=len*number-1) {
+							table[j+1][i+1]=rs.getInt(i+2);
+						}
+						else if(j==len*number){
+							table[0][i+1]=rs.getInt(i+2);
+						}
+						else if(j==len*number+1){
+							table[i+1][0]=rs.getInt(i+2);
+						}
+					}
+					j++;
+					System.out.println(rs.getInt(1));
+					
+				
+				table[0][0]=0;
+				if(counter==number) {
+					//return table;
 				}
-				else if(j==len){
-					table[0][i+1]=rs.getInt(i+2);
-				}
-				else {
-					table[i+1][0]=rs.getInt(i+2);
-				}
-			}
-			j++;
+				counter++;
+				
 		}
-		table[0][0]=0;
+		
 		
 		return table;
 	}
+	*/
+	
+	static int[][] processingArray(ResultSet rs, int len, int number) throws SQLException{
+		int [][] table = new int[len+1][len+1];
+		int j=0;
+		number++;
+		int counter=0;
+			while (rs.next()) {	
+				if(counter>=number*8-8 && counter<number*8) {
+					for(int i=0;i<len;i++) {
+						if(j<=len-1) {
+							table[j+1][i+1]=rs.getInt(i+2);
+						}
+						else if(j==len){
+							table[0][i+1]=rs.getInt(i+2);
+						}
+						else if(j==len+1){
+							table[i+1][0]=rs.getInt(i+2);
+						}
+					}
+					j++;
+					System.out.println(rs.getInt(1));
+					table[0][0]=0;
+				}
+				counter++;
+		}
+		return table;
+	}
+	
 	
 	static public void wyswietlDaneZBazy(int[][] table,int length) {
 		  

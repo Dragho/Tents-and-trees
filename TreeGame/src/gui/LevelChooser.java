@@ -29,25 +29,50 @@ public class LevelChooser extends JFrame implements ActionListener{
 		
 		
 		JPanel board = new JPanel();
-		board.setBounds(70, 70, 200, 600);
+		board.setBounds(70, 70, 200, 400);
 		board.setBackground(new Color(40,40,40));
 		
 		//add(board);
-		board.setLayout(new GridLayout(20,1));
+		board.setLayout(new GridLayout(10,1));
 		
-		JButton[] tabButton = new JButton[20];
+		JButton[] tabButton = new JButton[10];
 		
-		for(int i=1;i<=20;i++) {
-			tabButton[i-1] = new JButton(Integer.toString(i));
-			board.add(tabButton[i-1]);
-			tabButton[i-1].addActionListener(this);
+		for(int i=0;i<=9;i++) {
+			tabButton[i] = new JButton(Integer.toString(i+1));
+			board.add(tabButton[i]);
+			tabButton[i].addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent event) {
+					
+					for(int i=0;i<10;i++) {
+						if(event.getSource() == tabButton[i]) {
+							dispose();
+							LevelEasy levelEasy;
+							try {
+								levelEasy = new LevelEasy(i);//HERE WE PASS NUMBER VARIABLE
+								levelEasy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+								levelEasy.setVisible(true);
+								levelEasy.setLocationRelativeTo(null);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}
+					
+					
+					
+				}
+				
+			});
 		}
 		
 		
 		
 		ScrollPane scroll = new ScrollPane();
 		scroll.setWheelScrollingEnabled(true);
-		scroll.setBounds(50, 50, 300, 300);
+		scroll.setBounds(50, 50, 300, 150);
 		scroll.add(board);
 		add(scroll);
 		
@@ -56,40 +81,31 @@ public class LevelChooser extends JFrame implements ActionListener{
 		bWyjscie.setBounds(220, 380, 130, 40);
 		bWyjscie.setFont(new Font("SansSerif", Font.BOLD, 15));
 		add(bWyjscie);
-		bWyjscie.addActionListener(this);
+		bWyjscie.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				if(event.getSource() == bWyjscie) {
+					dispose();
+					Window window = new Window();
+					window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					window.setVisible(true);
+					window.setLocationRelativeTo(null);
+					return;
+					
+				}
+				
+			}
+			
+		});
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		Object source = arg0.getSource();
-		if(source == bWyjscie) {
-			dispose();
-			Window window = new Window();
-			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			window.setVisible(true);
-			window.setLocationRelativeTo(null);
-			return;
-			
-		}
-		for(int i=0;i<20;i++) {
-			if(source == tabButton[i]) {
-				dispose();
-				LevelEasy levelEasy;
-				try {
-					levelEasy = new LevelEasy(i);//HERE WE PASS NUMBER VARIABLE
-					levelEasy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					levelEasy.setVisible(true);
-					levelEasy.setLocationRelativeTo(null);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		
-		
-	}
+	
 	
 }
