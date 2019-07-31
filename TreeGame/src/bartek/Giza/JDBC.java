@@ -4,6 +4,7 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Time;
 
 public class JDBC {
 
@@ -25,6 +26,9 @@ public class JDBC {
 			query = "Select * FROM myfirstschema.levelhard";
 			length=15;
 		}
+		else if(level==4) {
+			query = "Select * FROM myfirstschema.resulttime";
+		}
 		else {
 			System.err.println("ERROR zla wartosc level'u");
 			System.exit(0);
@@ -42,10 +46,17 @@ public class JDBC {
                 //Uruchamiamy zapytanie do bazy danych
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-
-              
-                int tab[][] = processingArray(rs,length,number);
-                
+                int tab[][] = null;
+                if(level>=1 && level<4) {
+                	tab = processingArray(rs,length,number);
+                }
+                else if(level==4) {
+                	//query="UPDATE resulttime SET "
+                }
+                else {
+                	System.err.println("level number error");
+                }
+                	
                 conn.close();
                 return tab;
                 
@@ -64,6 +75,30 @@ public class JDBC {
         }
         
         return null;
+	}
+	
+	public static Time[] getResultTimes() throws SQLException, ClassNotFoundException {
+		String URLConnection = "jdbc:mysql://localhost:3306/myfirstschema?user=newuser&password=asdQWE";
+		String query = "Select * FROM myfirstschema.resulttime";
+		
+		Connection conn = DriverManager.getConnection(URLConnection);
+        
+        //Ustawiamy sterownik MySQL
+        Class.forName("com.mysql.jdbc.Driver");
+        
+        //Uruchamiamy zapytanie do bazy danych
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        
+        Time[] time = new Time[15];
+        int i=0;
+        while(rs.next()) {
+        	time[i]=rs.getTime(2);
+        	System.out.println(time[i]);
+        	i++;
+        }
+        
+		return time;
 	}
 	
 	static int[][] processingArray(ResultSet rs, int len, int number) throws SQLException{

@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import bartek.Giza.JDBC;
+
 public class WinnerWindow extends JFrame implements ActionListener {
 
 	public WinnerWindow(MyTimerTask timer) {
@@ -33,6 +35,7 @@ public class WinnerWindow extends JFrame implements ActionListener {
 			lEndTime.setBounds(120, 200, 100, 20);
 			lEndTime.setFont(new Font("SansSerif", Font.BOLD, 15));
 			Formatter formatter = new Formatter();
+			
 		   	formatter.format("%d  :  %02d",timer.minutes, timer.seconds);
 		   	String formattedString = formatter.toString();
 		   	lEndTime.setText(formattedString);
@@ -50,9 +53,9 @@ public class WinnerWindow extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		dispose();
-		Window window = new Window();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setVisible(true);
-		window.setLocationRelativeTo(null);
+		MainWindow mainWindow = new MainWindow();
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainWindow.setVisible(true);
+		mainWindow.setLocationRelativeTo(null);
 	}
 }

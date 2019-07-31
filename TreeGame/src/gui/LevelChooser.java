@@ -87,10 +87,10 @@ public class LevelChooser extends JFrame implements ActionListener{
 			public void actionPerformed(ActionEvent event) {
 				if(event.getSource() == bWyjscie) {
 					dispose();
-					Window window = new Window();
-					window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					window.setVisible(true);
-					window.setLocationRelativeTo(null);
+					MainWindow mainWindow = new MainWindow();
+					mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					mainWindow.setVisible(true);
+					mainWindow.setLocationRelativeTo(null);
 					return;
 					
 				}

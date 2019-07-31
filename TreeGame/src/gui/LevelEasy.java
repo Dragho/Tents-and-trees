@@ -25,11 +25,11 @@ import logicEngine.Mechanics;
 
 public class LevelEasy extends JFrame{
 	
-	private final int BOARD_WIDTH = 280;
-	private final int BOARD_HEIGHT = 280;
-	private final int BOARD_X_POSITION = 50;
-	private final int BOARD_Y_POSITION = 70;
-	private final int LENGTH = 6;
+	final int BOARD_WIDTH = 280;
+	final int BOARD_HEIGHT = 280;
+	final int BOARD_X_POSITION = 50;
+	final int BOARD_Y_POSITION = 70;
+	final int LENGTH = 6;
 	
 	public LevelEasy(int number) throws SQLException{
 		super("Level ³atwy");
@@ -173,10 +173,10 @@ public class LevelEasy extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				Window window = new Window();
-				window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				window.setVisible(true);
-				window.setLocationRelativeTo(null);
+				MainWindow mainWindow = new MainWindow();
+				mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				mainWindow.setVisible(true);
+				mainWindow.setLocationRelativeTo(null);
 			}
 		});
 		

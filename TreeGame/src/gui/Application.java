@@ -5,24 +5,25 @@ public class Application {
 
 	public static void main(String[] args) {
 		
-		Window window = new Window();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setVisible(true);
-		window.setLocationRelativeTo(null);
+		MainWindow mainWindow = new MainWindow();
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainWindow.setVisible(true);
+		mainWindow.setLocationRelativeTo(null);
 
 	}
 /*
- * 1)English naming
- * 2)Simplify class Mechanics
- * 3)Change class Mechanics to inner or local or anonymous class (we'll see about that)
- * 4)Expand database and add randomness to levels/add another window with levels to choose(1 database each type levels)
- * 5)Add 2 other levels
- * 6)Upgrade graphically end game window and save last time per level 
- * 7)Add database with clock history
- * 8)Correct connection to mysql database
- * 9)Add some graphical details
- * .
- * .
- * .
+ * MAIN:
+ * correct graphically ResultWindow and find way to present time results
+ * add functionality to correct result times in db
+ * Add 2 other levels
+ * Correct connection to mysql database
+ * 
+ * SIDE:
+ * strange stuff are happening in ResultWindow class
+ * bExit should be public 
+ * Simplify class Mechanics
+ * Change class Mechanics to inner or local or anonymous class (we'll see about that)
+ * Upgrade graphically end game window and save last time per level
+ * Add some graphical details
  */
 }
