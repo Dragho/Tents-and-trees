@@ -50,9 +50,6 @@ public class JDBC {
                 if(level>=1 && level<4) {
                 	tab = processingArray(rs,length,number);
                 }
-                else if(level==4) {
-                	//query="UPDATE resulttime SET "
-                }
                 else {
                 	System.err.println("level number error");
                 }
@@ -128,6 +125,9 @@ public class JDBC {
 		return table;
 	}
 	
+	static public void updateResult(Time time) {
+		
+	}
 	
 	static public void wyswietlDaneZBazy(int[][] table,int length) {
 		  

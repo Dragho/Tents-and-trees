@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Time;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -16,9 +20,22 @@ import bartek.Giza.JDBC;
 public class MainWindow extends JFrame implements ActionListener{
 	JButton bLevelEasy, bLevelMed, bLevelHard, bExit, bResultTime;
 	JLabel menu;
-	public MainWindow() {
+	static Time[] time;
+	
+	
+	public MainWindow() throws ClassNotFoundException, SQLException {
 		super("My window");
 		
+		initResults();
+		initWindow();
+
+	}
+
+	static Time[] getTime() {
+		return time;
+	}
+
+	private void initWindow() {
 		setSize(400, 500);
 		setLayout(null);
 		
@@ -56,12 +73,37 @@ public class MainWindow extends JFrame implements ActionListener{
 		bExit.addActionListener(this);
 		
 		menu = new JLabel("MAIN MENU");
-		menu.setBounds(115, 20, 250, 50);
+		menu.setBounds(140, 20, 250, 50);
 		menu.setFont(new Font("SansSerif", Font.BOLD, 20));
 	  //lWyswietlDate.setForeground(new Color(200,40,200));
 		add(menu);
 	}
+	
+	private void initResults() throws ClassNotFoundException, SQLException {
+		time = JDBC.getResultTimes();
+	}
 
+	static void updateDB(MyTimerTask myTimerTask, int number, int level) throws SQLException, ClassNotFoundException {
+		String query;
+		String URLConnection = "jdbc:mysql://localhost:3306/myfirstschema?user=newuser&password=asdQWE";
+		if(myTimerTask.minutes>0 && myTimerTask.seconds<10) {
+			query = "Update resulttime Set time = "+myTimerTask.minutes+"0"+myTimerTask.seconds+" Where id = "+(number+1)+";";
+		}
+		else {
+			query = "Update resulttime Set time = "+myTimerTask.minutes+myTimerTask.seconds+" Where id = "+(number+1)+";";
+		}
+		
+		System.out.println(query);
+		Connection conn = DriverManager.getConnection(URLConnection);
+        
+        //Ustawiamy sterownik MySQL
+        Class.forName("com.mysql.jdbc.Driver");
+        
+        //Uruchamiamy zapytanie do bazy danych
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate(query);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object source = arg0.getSource();
@@ -89,10 +131,6 @@ public class MainWindow extends JFrame implements ActionListener{
 		}
 		else if(source == bExit) {
 			System.exit(0);
-		}
-		
-		
-		
+		}	
 	}
-
 }

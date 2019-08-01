@@ -1,9 +1,11 @@
 package gui;
 
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
 public class Application {
-
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		
 		MainWindow mainWindow = new MainWindow();
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -13,7 +15,6 @@ public class Application {
 	}
 /*
  * MAIN:
- * correct graphically ResultWindow and find way to present time results
  * add functionality to correct result times in db
  * Add 2 other levels
  * Correct connection to mysql database

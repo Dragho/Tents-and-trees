@@ -30,10 +30,11 @@ public class LevelEasy extends JFrame{
 	final int BOARD_X_POSITION = 50;
 	final int BOARD_Y_POSITION = 70;
 	final int LENGTH = 6;
+	final int LEVEL = 1;
 	
 	public LevelEasy(int number) throws SQLException{
 		super("Level ³atwy");
-		int[][] table = JDBC.wczytajPlansze(1,number);
+		int[][] table = JDBC.wczytajPlansze(LEVEL,number);
 		JDBC.wyswietlDaneZBazy(table, 6);
 		
 		JButton bWyjscie;
@@ -136,7 +137,13 @@ public class LevelEasy extends JFrame{
 						            	}
 						            	if(Mechanics.checkGameMechanics(table,topLabels, leftLabels, information, i,j, LENGTH)==1) {
 						            		dispose();
-						            		WinnerWindow winnerWindow = new WinnerWindow(myTimerTask);
+						            		WinnerWindow winnerWindow=null;
+											try {
+												winnerWindow = new WinnerWindow(myTimerTask,number,LEVEL);
+											} catch (ClassNotFoundException | SQLException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
 						            		winnerWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						            		winnerWindow.setVisible(true);
 						            		winnerWindow.setLocationRelativeTo(null);
@@ -173,7 +180,13 @@ public class LevelEasy extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				MainWindow mainWindow = new MainWindow();
+				MainWindow mainWindow=null;
+				try {
+					mainWindow = new MainWindow();
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				mainWindow.setVisible(true);
 				mainWindow.setLocationRelativeTo(null);

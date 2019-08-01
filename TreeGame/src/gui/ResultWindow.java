@@ -20,9 +20,13 @@ import bartek.Giza.JDBC;
 class ResultWindow extends JFrame implements ActionListener{
 	JButton bLevelEasy, bLevelMed, bLevelHard, bExit, bResultTime;
 	JLabel menu;
+	
 	public ResultWindow() {
 		super("Resultset");
-		
+		initWindow();
+	}
+	
+	private void initWindow() {
 		setSize(400, 500);
 		setLayout(null);
 		
@@ -53,12 +57,13 @@ class ResultWindow extends JFrame implements ActionListener{
 		add(bExit);
 		bExit.addActionListener(this);
 		
-		menu = new JLabel("MAIN MENU");
-		menu.setBounds(115, 20, 250, 50);
+		menu = new JLabel("HIGHSCORES");
+		menu.setBounds(120, 20, 250, 50);
 		menu.setFont(new Font("SansSerif", Font.BOLD, 20));
 	  //lWyswietlDate.setForeground(new Color(200,40,200));
 		add(menu);
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object source = arg0.getSource();
@@ -70,13 +75,7 @@ class ResultWindow extends JFrame implements ActionListener{
 			resultset.setSize(400, 500);
 			resultset.setLocationRelativeTo(null);
 			resultset.setLayout(null);
-			Time[] times = null;
-			try {
-				times = JDBC.getResultTimes();
-			} catch (ClassNotFoundException | SQLException e) {
-				System.out.println("CO TU SIE");
-				e.printStackTrace();
-			}
+			Time[] times = MainWindow.getTime();
 			
 			JPanel boardBG = new JPanel();
 			boardBG.setBounds(90, 50, 200, 320);
@@ -101,17 +100,28 @@ class ResultWindow extends JFrame implements ActionListener{
 				
 			}
 			
-			resultset.add(board);
-			resultset.add(boardBG);
-			resultset.add(bExit);
-			bExit.addActionListener(new ActionListener() {
+			JButton bExitResultWindow = new JButton("Exit");
+			bExitResultWindow.setBounds(220, 380, 130, 40);
+			bExitResultWindow.setFont(new Font("SansSerif", Font.BOLD, 15));
+			bExitResultWindow.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					resultset.dispose();
+					ResultWindow resultWindow = new ResultWindow();
+					resultWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					resultWindow.setVisible(true);
+					resultWindow.setLocationRelativeTo(null);
 				}
 				
 			});
+			
+			
+			resultset.add(board);
+			resultset.add(boardBG);
+			resultset.add(bExitResultWindow);
+			
+			
 			
 		}
 		else if(source == bLevelMed) {
@@ -122,7 +132,13 @@ class ResultWindow extends JFrame implements ActionListener{
 		}
 		else if(source == bExit) {
 			dispose();
-			MainWindow mainWindow = new MainWindow();
+			MainWindow mainWindow=null;
+			try {
+				mainWindow = new MainWindow();
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			mainWindow.setVisible(true);
 			mainWindow.setLocationRelativeTo(null);
