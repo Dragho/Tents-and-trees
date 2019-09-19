@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
@@ -132,5 +133,34 @@ public class MainWindow extends JFrame implements ActionListener{
 		else if(source == bExit) {
 			System.exit(0);
 		}	
+	}
+
+	public static boolean isNewRecord(MyTimerTask myTimerTask, int number, int level) throws ClassNotFoundException, SQLException {
+		String query;
+		String URLConnection = "jdbc:mysql://localhost:3306/myfirstschema?user=newuser&password=asdQWE";
+		query = "SELECT time FROM resulttime where id = "+(number+1)+";";
+
+		Connection conn = DriverManager.getConnection(URLConnection);
+        
+        //Ustawiamy sterownik MySQL
+        Class.forName("com.mysql.jdbc.Driver");
+        
+        //Uruchamiamy zapytanie do bazy danych
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        int oldTime = 0;
+        while(rs.next()) {
+        	String str = rs.getTime(1)+"";
+        	int sec = (str.charAt(6)-48)*10+(str.charAt(7)-48);
+        	int min = (str.charAt(3)-48)*1000+(str.charAt(4)-48)*10;
+        	oldTime=min+sec;
+        }
+        
+        int newTime = myTimerTask.minutes*100 + myTimerTask.seconds;
+        
+        if(oldTime==0)
+        	return true;
+        
+		return newTime<oldTime;
 	}
 }

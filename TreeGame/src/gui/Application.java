@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 public class Application {
 	
+//TO DO: generic void function to set default close operations etc..
+	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		
 		MainWindow mainWindow = new MainWindow();
@@ -15,16 +17,19 @@ public class Application {
 	}
 /*
  * MAIN:
- * add functionality to correct result times in db
  * Add 2 other levels
  * Correct connection to mysql database
  * 
  * SIDE:
- * strange stuff are happening in ResultWindow class
- * bExit should be public 
+ * bExit should be default
  * Simplify class Mechanics
- * Change class Mechanics to inner or local or anonymous class (we'll see about that)
- * Upgrade graphically end game window and save last time per level
  * Add some graphical details
+ * 
+ * PROS FROM MAKING THIS PROJECT:
+ * - encapsulation
+ * - awt gui
+ * - jdbc connection with db
+ * - generic functions
+ * - a lot of fun :)
  */
 }

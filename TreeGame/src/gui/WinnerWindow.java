@@ -23,7 +23,9 @@ public class WinnerWindow extends JFrame implements ActionListener {
 	public WinnerWindow(MyTimerTask myTimerTask, int number, int level) throws ClassNotFoundException, SQLException {
 			super("CONGRATULATIONS!");
 			initWindow(myTimerTask);
-			MainWindow.updateDB(myTimerTask, number, level);
+			if(MainWindow.isNewRecord(myTimerTask, number, level))
+				MainWindow.updateDB(myTimerTask, number, level);
+			
 			
 	}
 	

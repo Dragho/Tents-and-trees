@@ -1,23 +1,24 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 public class LevelChooser extends JFrame implements ActionListener{
+	/**
+	 * generated serialVersionUID
+	 */
+	private static final long serialVersionUID = -4847262403549783480L;
+
 	JButton bPoziomLatwy, bPoziomSredni, bPoziomTrudny, bWyjscie;
 	JButton[] tabButton;
 	JLabel menu;

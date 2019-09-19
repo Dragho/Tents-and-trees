@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 
 public class JDBC {
-
-	static String dataFromDatabase;
-	//INTEGER NUMBER IS SUPPOSED TO CHOOSE LEVEL FROM DB
+	
 	static public int[][] wczytajPlansze(int level, int number) throws SQLException {
 		String URLConnection = "jdbc:mysql://localhost:3306/myfirstschema?user=newuser&password=asdQWE";
 		String query = "Select * FROM myfirstschema.leveleasy";
@@ -124,10 +122,7 @@ public class JDBC {
 		}
 		return table;
 	}
-	
-	static public void updateResult(Time time) {
-		
-	}
+
 	
 	static public void wyswietlDaneZBazy(int[][] table,int length) {
 		  

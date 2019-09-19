@@ -153,12 +153,12 @@ public class Mechanics {
 					if(table[i][j]==2)suma++;
 					else if(table[i][j]==4)
 						if(!treeNeighbor(table,i,j)) {
-							information.setText("Jedno z drzew nie ma przypisanego namiotu!");
+							information.setText("At least one of the trees is not connected to any tent!");
 							information.setForeground(Color.RED);
 						}
 				}
 				if(table[i][0]!=suma) {
-					information.setText("Liczba namiotow w wierszach nie zgadza sie!");
+					information.setText("Number of tents in rows isn't correct!");
 					information.setForeground(Color.RED);
 					return 0;
 				}
@@ -169,13 +169,13 @@ public class Mechanics {
 					if(table[j][i]==2)suma++;
 				}
 				if(table[0][i]!=suma) {
-					information.setText("Liczba namiotow w kolumnach nie zgadza sie!");
+					information.setText("Number of tents in columns isn't correct!");
 					information.setForeground(Color.RED);
 					return 0;
 				}
 			}
 			
-			System.out.println("ZWYCIESTWO!");
+			System.out.println("VICTORY!");
 			return 1;
 		}
 		return 0;
