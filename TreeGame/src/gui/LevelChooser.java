@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class LevelChooser extends JFrame implements ActionListener{
+public class LevelChooser extends JFrame{
 	/**
 	 * generated serialVersionUID
 	 */
@@ -24,16 +24,19 @@ public class LevelChooser extends JFrame implements ActionListener{
 	JLabel menu;
 	public LevelChooser() {
 		super("Choose level");
+		initWindow();
+		
+	}
+	
+	private void initWindow() {
+
 		
 		setSize(400, 500);
 		setLayout(null);
 		
-		
 		JPanel board = new JPanel();
 		board.setBounds(70, 70, 200, 400);
 		board.setBackground(new Color(40,40,40));
-		
-		//add(board);
 		board.setLayout(new GridLayout(10,1));
 		
 		JButton[] tabButton = new JButton[10];
@@ -56,27 +59,19 @@ public class LevelChooser extends JFrame implements ActionListener{
 								levelEasy.setVisible(true);
 								levelEasy.setLocationRelativeTo(null);
 							} catch (SQLException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 						}
 					}
-					
-					
-					
 				}
-				
 			});
 		}
-		
-		
 		
 		ScrollPane scroll = new ScrollPane();
 		scroll.setWheelScrollingEnabled(true);
 		scroll.setBounds(50, 50, 300, 150);
 		scroll.add(board);
 		add(scroll);
-		
 		
 		bWyjscie = new JButton("Wyjœcie");
 		bWyjscie.setBounds(220, 380, 130, 40);
@@ -92,27 +87,14 @@ public class LevelChooser extends JFrame implements ActionListener{
 					try {
 						mainWindow = new MainWindow();
 					} catch (ClassNotFoundException | SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					mainWindow.setVisible(true);
 					mainWindow.setLocationRelativeTo(null);
-					return;
-					
-				}
-				
+					return;	
+				}	
 			}
-			
 		});
-		
 	}
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	
 }

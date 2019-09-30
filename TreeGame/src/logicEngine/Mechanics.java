@@ -37,7 +37,6 @@ public class Mechanics {
 	}
 	
 	public static int checkGameMechanics(int[][] table,JLabel[] topLabels, JLabel[] leftLabels, JLabel information, int x, int y, int length) {
-		//System.out.println("Here we do some logics");
 		JDBC.wyswietlDaneZBazy(table, 6);
 		boolean error=false;
 		boolean neighborError=false;

@@ -21,7 +21,6 @@ public class Application {
  * Correct connection to mysql database
  * 
  * SIDE:
- * bExit should be default
  * Simplify class Mechanics
  * Add some graphical details
  * 

@@ -72,9 +72,21 @@ public class JDBC {
         return null;
 	}
 	
-	public static Time[] getResultTimes() throws SQLException, ClassNotFoundException {
+	public static Time[] getResultTimes(int levelNumber) throws SQLException, ClassNotFoundException {
+		
 		String URLConnection = "jdbc:mysql://localhost:3306/myfirstschema?user=newuser&password=asdQWE";
-		String query = "Select * FROM myfirstschema.resulttime";
+		String query = "";
+		
+		if(levelNumber == 1)
+			query = "Select * FROM myfirstschema.resulttimeeasy";
+		else if (levelNumber == 2)
+			query = "Select * FROM myfirstschema.resulttimemed";
+		else if (levelNumber == 3)
+			query = "Select * FROM myfirstschema.resulttimehard";
+		else {
+			System.err.println("Wrong levelNumber (JDBC.java)");
+			return null;
+		}
 		
 		Connection conn = DriverManager.getConnection(URLConnection);
         
@@ -123,7 +135,6 @@ public class JDBC {
 		return table;
 	}
 
-	
 	static public void wyswietlDaneZBazy(int[][] table,int length) {
 		  
 		for(int i=0;i<length+1;i++) {

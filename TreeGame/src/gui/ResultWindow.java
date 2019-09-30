@@ -67,15 +67,36 @@ class ResultWindow extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object source = arg0.getSource();
-		if(source == bLevelEasy) {
+		int levelNumber = 0;
+		if(source == bLevelEasy) 
+			levelNumber = 1;
+		else if(source == bLevelMed) 
+			levelNumber = 2;
+		else if(source == bLevelHard) {
+			levelNumber = 3;
+		}
+		else if(source == bExit) {
 			dispose();
-			JFrame resultset = new JFrame("Results");//TO DO: THIS IS SUPPOSED TO BE ONE USE CLASS TO SHOW ONLY TIME RESULTS
+			MainWindow mainWindow=null;
+			try {
+				mainWindow = new MainWindow();
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
+			mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			mainWindow.setVisible(true);
+			mainWindow.setLocationRelativeTo(null);
+			return;
+		}
+		
+			dispose();
+			JFrame resultset = new JFrame("Results");
 			resultset.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			resultset.setVisible(true);
 			resultset.setSize(400, 500);
 			resultset.setLocationRelativeTo(null);
 			resultset.setLayout(null);
-			Time[] times = MainWindow.getTime();
+			Time[] times = MainWindow.getTime(levelNumber);
 			
 			JPanel boardBG = new JPanel();
 			boardBG.setBounds(90, 50, 200, 320);
@@ -97,7 +118,6 @@ class ResultWindow extends JFrame implements ActionListener{
 				lTimesNumbers[i].setText("Level nr "+(i+1)+":");
 				board.add(lTimesNumbers[i]);
 				board.add(lTimes[i]);
-				
 			}
 			
 			JButton bExitResultWindow = new JButton("Exit");
@@ -115,34 +135,9 @@ class ResultWindow extends JFrame implements ActionListener{
 				}
 				
 			});
-			
-			
+						
 			resultset.add(board);
 			resultset.add(boardBG);
 			resultset.add(bExitResultWindow);
-			
-			
-			
 		}
-		else if(source == bLevelMed) {
-			
-		}
-		else if(source == bLevelHard) {
-			
-		}
-		else if(source == bExit) {
-			dispose();
-			MainWindow mainWindow=null;
-			try {
-				mainWindow = new MainWindow();
-			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			mainWindow.setVisible(true);
-			mainWindow.setLocationRelativeTo(null);
-		}
-		
-	}
 }

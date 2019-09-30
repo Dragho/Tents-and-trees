@@ -21,19 +21,24 @@ import bartek.Giza.JDBC;
 public class MainWindow extends JFrame implements ActionListener{
 	JButton bLevelEasy, bLevelMed, bLevelHard, bExit, bResultTime;
 	JLabel menu;
-	static Time[] time;
+	static Time[] timeEasy, timeMed, timeHard;
 	
 	
 	public MainWindow() throws ClassNotFoundException, SQLException {
 		super("My window");
-		
-		initResults();
 		initWindow();
-
+		initResults();
 	}
 
-	static Time[] getTime() {
-		return time;
+	static Time[] getTime(int level) {
+		if(level==1)
+			return timeEasy;
+		if(level==2)
+			return timeMed;
+		if(level==3)
+			return timeHard;
+		System.err.println("Wrong levelNumber");
+		return null;
 	}
 
 	private void initWindow() {
@@ -81,30 +86,11 @@ public class MainWindow extends JFrame implements ActionListener{
 	}
 	
 	private void initResults() throws ClassNotFoundException, SQLException {
-		time = JDBC.getResultTimes();
+		timeEasy = JDBC.getResultTimes(1);
+		timeMed = JDBC.getResultTimes(2);
+		timeHard = JDBC.getResultTimes(3);
 	}
 
-	static void updateDB(MyTimerTask myTimerTask, int number, int level) throws SQLException, ClassNotFoundException {
-		String query;
-		String URLConnection = "jdbc:mysql://localhost:3306/myfirstschema?user=newuser&password=asdQWE";
-		if(myTimerTask.minutes>0 && myTimerTask.seconds<10) {
-			query = "Update resulttime Set time = "+myTimerTask.minutes+"0"+myTimerTask.seconds+" Where id = "+(number+1)+";";
-		}
-		else {
-			query = "Update resulttime Set time = "+myTimerTask.minutes+myTimerTask.seconds+" Where id = "+(number+1)+";";
-		}
-		
-		System.out.println(query);
-		Connection conn = DriverManager.getConnection(URLConnection);
-        
-        //Ustawiamy sterownik MySQL
-        Class.forName("com.mysql.jdbc.Driver");
-        
-        //Uruchamiamy zapytanie do bazy danych
-        Statement stmt = conn.createStatement();
-        stmt.executeUpdate(query);
-	}
-	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object source = arg0.getSource();
@@ -135,32 +121,5 @@ public class MainWindow extends JFrame implements ActionListener{
 		}	
 	}
 
-	public static boolean isNewRecord(MyTimerTask myTimerTask, int number, int level) throws ClassNotFoundException, SQLException {
-		String query;
-		String URLConnection = "jdbc:mysql://localhost:3306/myfirstschema?user=newuser&password=asdQWE";
-		query = "SELECT time FROM resulttime where id = "+(number+1)+";";
-
-		Connection conn = DriverManager.getConnection(URLConnection);
-        
-        //Ustawiamy sterownik MySQL
-        Class.forName("com.mysql.jdbc.Driver");
-        
-        //Uruchamiamy zapytanie do bazy danych
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        int oldTime = 0;
-        while(rs.next()) {
-        	String str = rs.getTime(1)+"";
-        	int sec = (str.charAt(6)-48)*10+(str.charAt(7)-48);
-        	int min = (str.charAt(3)-48)*1000+(str.charAt(4)-48)*10;
-        	oldTime=min+sec;
-        }
-        
-        int newTime = myTimerTask.minutes*100 + myTimerTask.seconds;
-        
-        if(oldTime==0)
-        	return true;
-        
-		return newTime<oldTime;
-	}
+	
 }
